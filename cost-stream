@@ -1,0 +1,24 @@
+---
+apiVersion: dimensions/v1
+kind: dimensions
+metadata:
+  name: aws-compute-by-products
+spec:
+  global: false
+  segment: "core/cloudProvider='AWS' AND core/Service='AmazonEC2' "
+  on: cost-usage
+  measures:
+    cost: usageAmount
+    vcpus: vcpus
+    timestamp: usageStartDate
+  dimensions:
+    type: static
+    elements:
+      - name: "user-api"
+        rule: "core/tag:svc='user-api'"
+      - name: "billing"
+        rule: "core/tag:svc='billing'"
+      - name: "data-platform"
+        rule: "core/tag:svc='data-platform'"
+---
+  
